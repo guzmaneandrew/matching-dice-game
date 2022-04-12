@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice App</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Dice App</h1>
+    <p>Roll matching icosahedron(20-sided) die to win an awesome prize!</p>
+    <label for="userName">Your Name</label>
+    <input type="text" id="userName"> <br/>
+    <br/>
+    <label for="diceRoll1">Dice 1</label>
+    <input type="button" id="diceRoll1" value="Roll!">
+    <p id="dice1result"></p> <br/>
+    <label for="diceRoll2">Dice 2</label>
+    <input type="button" id="diceRoll2" value="Roll!">
+    <p id="dice2result"></p>
+    <button id="submit">Click to Reveal!</button>
+    <br/>
+    <p id="server-message"></p>
+
+    <script>
+        $(document).ready(function() {
+            $("#diceRoll1").click(function() {
+                console.log("Dice 1 rolled!")
+            });
+
+            $("#diceRoll2").click(function() {
+                console.log("Dice 2 rolled!")
+            });
+
+            $("#submit").click(function(){
+                let url = "http://localhost:3000/submitDiceRoll";
+                let data = {
+                    userName: $("#userName").val(),
+                    dice1: 1,
+                    dice2: 2
+                };
+                $.post(url, data, function(response){
+                    let message = response.serverMessage;
+                    let error = response.error;
+
+                    $("#server-message").html(message);
+                    $("#server-message").css("color", error ? "red" : "green");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

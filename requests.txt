@@ -1,0 +1,11 @@
+POST
+name: submitDiceRoll
+send {
+    name: String,
+    dice1: Number (1 - 20),
+    dice2: Number (1 - 20)
+}
+receive {
+    serverMessage: String,
+    error: Boolean
+}
