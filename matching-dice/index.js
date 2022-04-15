@@ -2,22 +2,20 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const _ = require('lodash');
+const credentials = require('./credentials.js');
 
 //Setup mongoose
-const dbURL = "mongodb+srv://user1:0fY8NlyqIJL8jzNH@cluster0.e6y2n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
+const dbURL = credentials.dbURL;
 const mongooseOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 };
-
 mongoose.connect(dbURL, mongooseOptions, function(error){
     checkError(error, "Successfully connected to MongoDB!");
 });
 
 let db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB Error: "));
-
 mongoose.Promise = global.Promise;
 
 const diceStructure = {
