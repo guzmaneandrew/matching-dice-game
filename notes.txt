@@ -5,7 +5,7 @@ FRONT-END
 - Textbox: for user name
 - Button: to roll dice1
 - Button: to roll dice2
-- Button: to reveal values of rolled die
+- Button: to send name, dice1, and dice2 values to the backend
 
 Notes
-- Temporarily used hardcoded values for dice1 and dice2. I intended for the values to be created(but not revealed) when the roll buttons are clicked. The values are to be reveled when the Click to Reveal! button is clicked.
+- Temporarily used hardcoded values for dice1 and dice2. I intended for the values to be created(but not revealed) when the roll buttons are clicked. The values are to be revealed(and sent in a POST request to the backend)when the Click to Reveal! button is clicked.

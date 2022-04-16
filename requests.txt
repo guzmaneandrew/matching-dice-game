@@ -1,4 +1,20 @@
 POST
+name: rollDice1
+send 
+{ //nothing }
+receive {
+    number: rolled dice value
+}
+
+POST
+name: rollDice2
+send
+{ //nothing }
+receive {
+    number: rolled dice value
+}
+
+POST
 name: submitDiceRoll
 send {
     name: String,

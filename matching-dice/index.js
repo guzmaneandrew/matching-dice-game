@@ -18,6 +18,7 @@ let db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB Error: "));
 mongoose.Promise = global.Promise;
 
+//Setup mongoDB
 const diceStructure = {
     userName: String,
     diceRoll1: Number,
@@ -42,12 +43,30 @@ app.use(bodyParser.json());
 //Express Routes
 app.use("/", express.static("public_html/"));
 
+app.post("/rollDice1", function(request, response){
+    let dice1 = _.random(1, 20);
+    console.log(`Dice 1: ${dice1}`);
+
+    let responseObject = {
+        dice: dice1
+    }
+    response.send(responseObject);
+});
+
+app.post("/rollDice2", function(request, response){
+    let dice2 = _.random(1, 20);
+    console.log(`Dice 2: ${dice2}`);
+
+    let responseObject = {
+        dice: dice2
+    }
+    response.send(responseObject);
+});
+
 app.post("/submitDiceRoll", function(request, response){
     let user = request.body.userName;
-    let dice1 = request.body.dice1;
-    let dice2 = request.body.dice2;
-    console.log(`Dice 1: ${dice1}, Dice 2: ${dice2}`);
-
+    let dice1 = dice1;
+    let dice2 = dice2;
     request.body.timestamp = new Date();
 
     //Create

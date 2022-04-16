@@ -27,11 +27,25 @@
     <script>
         $(document).ready(function() {
             $("#diceRoll1").click(function() {
-                console.log("Dice 1 rolled!")
+                let url = "http://localhost:3000/rollDice1";
+                console.log("Dice 1 rolled!");
+                let dice1target = "#dice1result";
+                $(dice1target).html("Dice 1 Rolled!");
+
+                $.post(url, {}, function(response){
+                    updateDiceRoll(dice1target, response.dice);
+                });
             });
 
             $("#diceRoll2").click(function() {
-                console.log("Dice 2 rolled!")
+                let url = "http://localhost:3000/rollDice2";
+                console.log("Dice 2 rolled!");
+                let dice2target = "#dice2result";
+                $("#dice2result").html("Dice 2 Rolled!");
+
+                $.post(url, {}, function(response){
+                    updateDiceRoll(dice2target, response.dice);
+                });
             });
 
             $("#submit").click(function(){
@@ -50,6 +64,11 @@
                 });
             });
         });
+
+        function updateDiceRoll(diceTarget, diceResult) {
+            $(diceTarget).html(diceResult);
+        }
+
     </script>
 </body>
 </html>
