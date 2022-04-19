@@ -49,21 +49,22 @@ let dice2Value = null;
 app.use("/", express.static("public_html/"));
 
 app.post("/rollDice1", function(request, response){
-    dice1Value = _.random(1, 20);
-    console.log(`Dice 1: ${dice1Value}`);
+    dice1 = _.random(1, 20);
+    console.log(`Dice 1: ${dice1}`);
 
     let responseObject = {
-        dice1: dice1Value
+        message: `Dice 1 rolled!`,
+        error: false
     }
     response.send(responseObject);
 });
 
 app.post("/rollDice2", function(request, response){
-    dice2Value = _.random(1, 20);
-    console.log(`Dice 2: ${dice2Value}`);
+    dice2 = _.random(1, 20);
+    console.log(`Dice 2: ${dice2}`);
 
     let responseObject = {
-        dice2: dice2Value
+        dice2: dice2
     }
     response.send(responseObject);
 });
@@ -73,7 +74,6 @@ app.post("/submitDiceRoll", function(request, response){
     request.body.diceRoll1 = dice1;
     request.body.diceRoll2 = dice2;
     request.body.timestamp = new Date();
-
 
     //Create
     let newDiceRollEntry = new diceModel(request.body);
@@ -95,6 +95,14 @@ app.post("/submitDiceRoll", function(request, response){
         }
     }
     
+    response.send(responseObject);
+});
+
+app.get("/getDice", function(request, response){
+    responseObject = {
+        dice1: dice1Value,
+        dice2: dice2Value,
+    }
     response.send(responseObject);
 });
 

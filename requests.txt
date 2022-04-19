@@ -3,7 +3,7 @@ name: rollDice1
 send 
 { //nothing }
 receive {
-    number: rolled dice value
+    Number: random (1 - 20)
 }
 
 POST
@@ -11,17 +11,25 @@ name: rollDice2
 send
 { //nothing }
 receive {
-    number: rolled dice value
+    Number: random (1 - 20)
 }
 
 POST
 name: submitDiceRoll
 send {
     name: String,
-    dice1: Number (1 - 20),
-    dice2: Number (1 - 20)
+    dice1: Number,
+    dice2: Number
 }
 receive {
     serverMessage: String,
     error: Boolean
+}
+
+GET
+name: getDice
+send { //nothing }
+receive {
+    dice1: rolled dice 1 value
+    dice2: rolled dice 2 value
 }

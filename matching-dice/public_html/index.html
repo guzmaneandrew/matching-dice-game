@@ -16,37 +16,50 @@
     <br/>
     <label for="diceRoll1">Dice 1</label>
     <input type="button" id="diceRoll1" value="Roll!">
-    <p id="dice1result"></p> <br/>
+    <p id="dice1target"></p> <br/>
     <label for="diceRoll2">Dice 2</label>
     <input type="button" id="diceRoll2" value="Roll!">
-    <p id="dice2result"></p>
+    <p id="dice2target"></p>
     <button id="submit">Click to Reveal!</button>
     <br/>
     <p id="server-message"></p>
 
     <script>
         $(document).ready(function() {
-            $("#diceRoll1").click(function() {
-                let url = "http://localhost:3000/rollDice1";
-                let dice1result = "#dice1result";
-                confirmDiceRoll(1, dice1result);
 
-                $.post(url, {}, function(response){
-                    updateDiceRoll(dice1result, response.dice1);
+            $("#diceRoll1").click(function() {
+
+                let url = "http://localhost:3000/rollDice1";
+                
+                $.post(url, function(response){
+                    let dice1Message = "#dice1target";
+                    let message = response.serverMessage;
+                    let error = response.error;
+                    confirmDiceRoll(1, dice1Message);
                 });
             });
 
             $("#diceRoll2").click(function() {
-                let url = "http://localhost:3000/rollDice2";
-                let dice2result = "#dice2result";
-                confirmDiceRoll(2, dice2result)
 
+                let url = "http://localhost:3000/rollDice2";
+                
                 $.post(url, {}, function(response){
-                    updateDiceRoll(dice2result, response.dice2);
+                    let dice2Message = "#dice2target";
+                    let message = response.serverMessage;
+                    let error = response.error;
+                    confirmDiceRoll(2, dice2Message);
+
                 });
             });
 
             $("#submit").click(function(){
+
+                let urlGet = "http://localhost:3000/getDice";
+                $.get(urlGet, function(data, status){
+                    $("#dice1result").html(data);
+
+                });
+
                 let url = "http://localhost:3000/submitDiceRoll";
                 let data = {
                     userName: $("#userName").val(),
@@ -57,10 +70,13 @@
 
                     $("#server-message").html(message);
                     $("#server-message").css("color", error ? "red" : "green");
+
+
                 });
             });
         });
 
+        //Provides a confirmation message when the dice has been rolled, displays the message at resultTarget
         function confirmDiceRoll(diceNum, resultTarget) {
             successMessage = `Dice ${diceNum} rolled!`;
             console.log(successMessage);
