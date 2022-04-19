@@ -28,23 +28,21 @@
         $(document).ready(function() {
             $("#diceRoll1").click(function() {
                 let url = "http://localhost:3000/rollDice1";
-                console.log("Dice 1 rolled!");
-                let dice1target = "#dice1result";
-                $(dice1target).html("Dice 1 Rolled!");
+                let dice1result = "#dice1result";
+                confirmDiceRoll(1, dice1result);
 
                 $.post(url, {}, function(response){
-                    updateDiceRoll(dice1target, response.dice);
+                    updateDiceRoll(dice1result, response.dice1);
                 });
             });
 
             $("#diceRoll2").click(function() {
                 let url = "http://localhost:3000/rollDice2";
-                console.log("Dice 2 rolled!");
-                let dice2target = "#dice2result";
-                $("#dice2result").html("Dice 2 Rolled!");
+                let dice2result = "#dice2result";
+                confirmDiceRoll(2, dice2result)
 
                 $.post(url, {}, function(response){
-                    updateDiceRoll(dice2target, response.dice);
+                    updateDiceRoll(dice2result, response.dice2);
                 });
             });
 
@@ -52,8 +50,6 @@
                 let url = "http://localhost:3000/submitDiceRoll";
                 let data = {
                     userName: $("#userName").val(),
-                    dice1: 1,
-                    dice2: 2
                 };
                 $.post(url, data, function(response){
                     let message = response.serverMessage;
@@ -64,6 +60,12 @@
                 });
             });
         });
+
+        function confirmDiceRoll(diceNum, resultTarget) {
+            successMessage = `Dice ${diceNum} rolled!`;
+            console.log(successMessage);
+            $(resultTarget).html(successMessage);
+        }
 
         function updateDiceRoll(diceTarget, diceResult) {
             $(diceTarget).html(diceResult);

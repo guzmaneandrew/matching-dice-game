@@ -19,13 +19,14 @@ db.on("error", console.error.bind(console, "MongoDB Error: "));
 mongoose.Promise = global.Promise;
 
 //Setup mongoDB
+//Create structure for Schema
 const diceStructure = {
     userName: String,
     diceRoll1: Number,
     diceRoll2: Number,
     timestamp: Date
 }
-
+//Create Schema and Model
 let diceSchema = new mongoose.Schema(diceStructure);
 let diceModel = new mongoose.model("dice_rolls", diceSchema);
 
@@ -40,34 +41,39 @@ console.log(`Express is running at port ${port}`);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+//Custom variables
+let dice1Value = null;
+let dice2Value = null;
+
 //Express Routes
 app.use("/", express.static("public_html/"));
 
 app.post("/rollDice1", function(request, response){
-    let dice1 = _.random(1, 20);
-    console.log(`Dice 1: ${dice1}`);
+    dice1Value = _.random(1, 20);
+    console.log(`Dice 1: ${dice1Value}`);
 
     let responseObject = {
-        dice: dice1
+        dice1: dice1Value
     }
     response.send(responseObject);
 });
 
 app.post("/rollDice2", function(request, response){
-    let dice2 = _.random(1, 20);
-    console.log(`Dice 2: ${dice2}`);
+    dice2Value = _.random(1, 20);
+    console.log(`Dice 2: ${dice2Value}`);
 
     let responseObject = {
-        dice: dice2
+        dice2: dice2Value
     }
     response.send(responseObject);
 });
 
 app.post("/submitDiceRoll", function(request, response){
     let user = request.body.userName;
-    let dice1 = dice1;
-    let dice2 = dice2;
+    request.body.diceRoll1 = dice1;
+    request.body.diceRoll2 = dice2;
     request.body.timestamp = new Date();
+
 
     //Create
     let newDiceRollEntry = new diceModel(request.body);
