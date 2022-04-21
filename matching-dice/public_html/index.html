@@ -20,12 +20,20 @@
     <label for="diceRoll2">Dice 2</label>
     <input type="button" id="diceRoll2" value="Roll!">
     <p id="dice2target"></p>
-    <button id="submit">Click to Reveal!</button>
+    <button id="submit" disabled="disabled">Click to Reveal!</button>
     <br/>
     <p id="server-message"></p>
 
     <script>
         $(document).ready(function() {
+            $("#userName").on('input change', function() {
+
+                if($(this).val() != " "){
+                    $("#submit").prop("disabled", false);
+                } else {
+                    $("#submit").prop("disabled", true);
+                }
+            });
 
             $("#diceRoll1").click(function() {
 
@@ -42,8 +50,8 @@
             $("#diceRoll2").click(function() {
 
                 let url = "http://localhost:3000/rollDice2";
-                
                 $.post(url, {}, function(response){
+                    
                     let dice2Message = "#dice2target";
                     let message = response.serverMessage;
                     let error = response.error;
@@ -55,7 +63,7 @@
             $("#submit").click(function(){
 
                 let urlGet = "http://localhost:3000/getDice";
-                $.post(urlGet, function(response){
+                $.get(urlGet, function(response){
                     $("#dice1target").html(response.dice1);
                     $("#dice2target").html(response.dice2);
                 });
@@ -63,15 +71,14 @@
                 let url = "http://localhost:3000/submitDiceRoll";
                 let data = {
                     userName: $("#userName").val(),
-                };
-                $.post(url, function(response){
+                }
+
+                $.post(url, data, function(response){
                     let message = response.serverMessage;
                     let error = response.error;
 
                     $("#server-message").html(message);
                     $("#server-message").css("color", error ? "red" : "green");
-
-
                 });
             });
         });

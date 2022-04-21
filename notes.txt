@@ -14,13 +14,14 @@ App Functionality Notes
 
 Progress Notes
 - 4/19 Working on get method to get values of rolled dice
-- 4/20 Worked on post handler functions to get dice values from the backend. 
+- 4/20 Worked on post handler functions to get dice values from the backend.
+- 4/21 Fixed get request to get dice values from backend and implemented disabled/enabled functionality to the Click to Reveal button
 
 !!Bugs to fix
-- Unable to reveal values without entering name.
-- Can't click roll dice buttons multiple times to force match
-- Unable to reveal dice values until both dice have been rolled
-- Why is ${user} undefined??
+- Disable the Roll buttons once they have been clicked
+- Fixed: Unable to reveal values without entering name.
+- Fixed: Unable to reveal dice values until both dice have been rolled
+- Fixed: Why is ${user} undefined?? User was undefined because I didn't send data to the backend in the post request.
 
-?? 
-- When do you use post vs get http method
+Questions?? 
+- When do you use post vs get http method? Post = get & put, get is only if you are receiving data from the backend, put is if you are sending data to the backend, and post does both.

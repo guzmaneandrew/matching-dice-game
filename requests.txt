@@ -26,7 +26,7 @@ receive {
     error: Boolean
 }
 
-GET
+POST
 name: getDice
 send { //nothing }
 receive {

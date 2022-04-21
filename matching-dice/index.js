@@ -93,7 +93,7 @@ app.post("/submitDiceRoll", function(request, response){
     }
     else {
         responseObject = {
-            serverMessage: `Sorry ${user}, you didn't roll matching die. Better luck next time!`,
+            serverMessage: `Sorry ${user}, you didn't roll matching dice. Better luck next time!`,
             error: true
         }
     }
@@ -101,7 +101,7 @@ app.post("/submitDiceRoll", function(request, response){
     response.send(responseObject);
 });
 
-app.post("/getDice", function(request, response){
+app.get("/getDice", function(request, response){
     responseObject = getDice();
     response.send(responseObject);
 });
