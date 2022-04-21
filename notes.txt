@@ -1,5 +1,5 @@
 Dice App
-- Click Roll! buttons to "roll die"
+- Click Roll! buttons to "roll dice"
 
 FRONT-END
 - Textbox: for user name
@@ -7,12 +7,20 @@ FRONT-END
 - Button: to roll dice2
 - Button: to send name, dice1, and dice2 values to the backend
 
-Notes
+App Functionality Notes
 - DONE Temporarily used hardcoded values for dice1 and dice2. 
 - DONE Values to be created(but not revealed) when the roll buttons are clicked. 
-- The values are to be revealed(and sent with a name in a POST request to the backend)when the Click to Reveal! button is clicked.
-- 4/19 Working on get method to get values of rolled dice
+- DONE The values are to be revealed(and sent with a name in a POST request to the backend)when the Click to Reveal! button is clicked.
 
-!
+Progress Notes
+- 4/19 Working on get method to get values of rolled dice
+- 4/20 Worked on post handler functions to get dice values from the backend. 
+
+!!Bugs to fix
 - Unable to reveal values without entering name.
-- Only able to click button once, can't click multiple times to force match
+- Can't click roll dice buttons multiple times to force match
+- Unable to reveal dice values until both dice have been rolled
+- Why is ${user} undefined??
+
+?? 
+- When do you use post vs get http method

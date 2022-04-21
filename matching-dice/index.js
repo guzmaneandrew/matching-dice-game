@@ -37,20 +37,22 @@ const port = 3000;
 app.listen(port);
 console.log(`Express is running at port ${port}`);
 
-//Set up body-parser
+//Configure express to use body-parser as middle-ware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 //Custom variables
-let dice1Value = null;
-let dice2Value = null;
+let dice = {
+    dice1: null,
+    dice2: null
+}
 
 //Express Routes
 app.use("/", express.static("public_html/"));
 
 app.post("/rollDice1", function(request, response){
-    dice1 = _.random(1, 20);
-    console.log(`Dice 1: ${dice1}`);
+    dice.dice1 = _.random(1, 20);
+    console.log(`Dice 1: ${dice.dice1}`);
 
     let responseObject = {
         message: `Dice 1 rolled!`,
@@ -60,19 +62,20 @@ app.post("/rollDice1", function(request, response){
 });
 
 app.post("/rollDice2", function(request, response){
-    dice2 = _.random(1, 20);
-    console.log(`Dice 2: ${dice2}`);
+    dice.dice2 = _.random(1, 20);
+    console.log(`Dice 2: ${dice.dice2}`);
 
     let responseObject = {
-        dice2: dice2
+        message: `Dice 2 rolled!`,
+        error: false
     }
     response.send(responseObject);
 });
 
 app.post("/submitDiceRoll", function(request, response){
     let user = request.body.userName;
-    request.body.diceRoll1 = dice1;
-    request.body.diceRoll2 = dice2;
+    request.body.diceRoll1 = dice.dice1;
+    request.body.diceRoll2 = dice.dice2;
     request.body.timestamp = new Date();
 
     //Create
@@ -82,7 +85,7 @@ app.post("/submitDiceRoll", function(request, response){
     });
 
     let responseObject;
-    if(dice1 === dice2){
+    if(dice.dice1 === dice.dice2){
         responseObject = {
             serverMessage: `Congrats ${user}, you won!`,
             error: false
@@ -98,11 +101,8 @@ app.post("/submitDiceRoll", function(request, response){
     response.send(responseObject);
 });
 
-app.get("/getDice", function(request, response){
-    responseObject = {
-        dice1: dice1Value,
-        dice2: dice2Value,
-    }
+app.post("/getDice", function(request, response){
+    responseObject = getDice();
     response.send(responseObject);
 });
 
@@ -112,4 +112,8 @@ function checkError(error, successMessage){
     } else {
         console.log(successMessage);
     }
+}
+
+function getDice() {
+    return dice;
 }

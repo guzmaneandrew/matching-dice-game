@@ -10,7 +10,7 @@
 </head>
 <body>
     <h1>Dice App</h1>
-    <p>Roll matching icosahedron(20-sided) dice to win an awesome prize!</p>
+    <p>Roll matching icosahedron(20-sided) dice to win!</p>
     <label for="userName">Your Name</label>
     <input type="text" id="userName"> <br/>
     <br/>
@@ -55,16 +55,16 @@
             $("#submit").click(function(){
 
                 let urlGet = "http://localhost:3000/getDice";
-                $.get(urlGet, function(data, status){
-                    $("#dice1result").html(data);
-
+                $.post(urlGet, function(response){
+                    $("#dice1target").html(response.dice1);
+                    $("#dice2target").html(response.dice2);
                 });
 
                 let url = "http://localhost:3000/submitDiceRoll";
                 let data = {
                     userName: $("#userName").val(),
                 };
-                $.post(url, data, function(response){
+                $.post(url, function(response){
                     let message = response.serverMessage;
                     let error = response.error;
 
