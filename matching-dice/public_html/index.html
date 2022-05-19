@@ -23,9 +23,11 @@
     <button id="submit" disabled="disabled">Click to Reveal!</button>
     <br/>
     <p id="server-message"></p>
+    <p id="refresh-button"></p>
 
     <script>
         $(document).ready(function() {
+            //If name field is left blank, submit button will remain disabled
             $("#userName").on('input change', function() {
 
                 if($(this).val() != " "){
@@ -83,6 +85,13 @@
                     $("#server-message").html(message);
                     $("#server-message").css("color", error ? "red" : "green");
                 });
+
+                $("#refresh-button").append("<button>New Game</button>");
+            });
+
+            $("#refresh-button").click(function(){
+                location.reload(true);
+                alert("Loading up a new game!");
             });
         });
 

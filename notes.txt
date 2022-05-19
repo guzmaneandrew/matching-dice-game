@@ -22,6 +22,8 @@ Progress Notes
 - Fixed: Unable to reveal values without entering name.
 - Fixed: Unable to reveal dice values until both dice have been rolled
 - Fixed: Why is ${user} undefined?? User was undefined because I didn't send data to the backend in the post request.
+- Add a refresh button to reload a new dice game
+- If dice are not rolled, still able to submit and alwasy matching dice
 
 Questions?? 
 - When do you use post vs get http method? Post = get & put, get is only if you are receiving data from the backend, put is if you are sending data to the backend, and post does both.
