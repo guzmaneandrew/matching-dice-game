@@ -14,11 +14,11 @@
     <label for="userName">Your Name</label>
     <input type="text" id="userName"> <br/>
     <br/>
-    <label for="diceRoll1">Dice 1</label>
-    <input type="button" id="diceRoll1" value="Roll!">
+    <label for="button1">Dice 1</label>
+    <input type="button" id="button1" value="Roll!">
     <p id="dice1target"></p> <br/>
-    <label for="diceRoll2">Dice 2</label>
-    <input type="button" id="diceRoll2" value="Roll!">
+    <label for="button2">Dice 2</label>
+    <input type="button" id="button2" value="Roll!">
     <p id="dice2target"></p>
     <button id="submit" disabled="disabled">Click to Reveal!</button>
     <br/>
@@ -35,7 +35,7 @@
                 }
             });
 
-            $("#diceRoll1").click(function() {
+            $("#button1").click(function() {
 
                 let url = "http://localhost:3000/rollDice1";
                 
@@ -45,9 +45,11 @@
                     let error = response.error;
                     confirmDiceRoll(1, dice1Message);
                 });
+
+                $("#button1").prop("disabled", true);
             });
 
-            $("#diceRoll2").click(function() {
+            $("#button2").click(function() {
 
                 let url = "http://localhost:3000/rollDice2";
                 $.post(url, {}, function(response){
@@ -56,8 +58,9 @@
                     let message = response.serverMessage;
                     let error = response.error;
                     confirmDiceRoll(2, dice2Message);
-
                 });
+
+                $("#button2").prop("disabled", true);
             });
 
             $("#submit").click(function(){

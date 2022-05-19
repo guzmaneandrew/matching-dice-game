@@ -1,5 +1,5 @@
 {
-  "name": "study_log_app",
+  "name": "matching-dice-game",
   "version": "1.0.0",
   "description": "Dice roll web application",
   "main": "index.js",
