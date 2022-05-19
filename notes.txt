@@ -18,12 +18,14 @@ Progress Notes
 - 4/21 Fixed get request to get dice values from backend and implemented disabled/enabled functionality to the Click to Reveal button
 
 !!Bugs to fix
-- Disable the Roll buttons once they have been clicked
+- Fixed: Disable the Roll buttons once they have been clicked
 - Fixed: Unable to reveal values without entering name.
 - Fixed: Unable to reveal dice values until both dice have been rolled
 - Fixed: Why is ${user} undefined?? User was undefined because I didn't send data to the backend in the post request.
-- Add a refresh button to reload a new dice game
-- If dice are not rolled, still able to submit and alwasy matching dice
+- Fixed: Add a refresh button to reload a new dice game
+- If dice are not rolled, still able to submit
+    Having trouble with logic for ensuringt that the input field and both buttons have been clicked prior to revealing values. Might need to separate tasks with a button to handle revealing the values and another that submits the results to the database
+- Disable reveal button after clicking once
 
 Questions?? 
 - When do you use post vs get http method? Post = get & put, get is only if you are receiving data from the backend, put is if you are sending data to the backend, and post does both.

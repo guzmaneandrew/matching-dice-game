@@ -20,7 +20,7 @@
     <label for="button2">Dice 2</label>
     <input type="button" id="button2" value="Roll!">
     <p id="dice2target"></p>
-    <button id="submit" disabled="disabled">Click to Reveal!</button>
+    <button id="submit">Click to Reveal!</button>
     <br/>
     <p id="server-message"></p>
     <p id="refresh-button"></p>
@@ -28,14 +28,10 @@
     <script>
         $(document).ready(function() {
             //If name field is left blank, submit button will remain disabled
-            $("#userName").on('input change', function() {
-
-                if($(this).val() != " "){
-                    $("#submit").prop("disabled", false);
-                } else {
-                    $("#submit").prop("disabled", true);
-                }
-            });
+            // if($("#userName").val() != null && $("#button1").prop("disabled") && $("#button2").prop("disabled")){
+            //     console.log("here");
+            //     $("#submit").prop("disabled", true);
+            // }
 
             $("#button1").click(function() {
 
@@ -86,6 +82,7 @@
                     $("#server-message").css("color", error ? "red" : "green");
                 });
 
+                $("#submit").prop("disabled", true);
                 $("#refresh-button").append("<button>New Game</button>");
             });
 
@@ -105,7 +102,6 @@
         function updateDiceRoll(diceTarget, diceResult) {
             $(diceTarget).html(diceResult);
         }
-
     </script>
 </body>
 </html>
